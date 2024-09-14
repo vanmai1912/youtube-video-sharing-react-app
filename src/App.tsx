@@ -11,7 +11,7 @@ function App() {
   return (
     <>
       <Header />
-      <main className="border-orange-400">
+      <main className="w-full md:container md:mx-auto">
         <Suspense fallback={<div>Loading...</div>}>{element}</Suspense>
       </main>
     </>

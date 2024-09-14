@@ -12,6 +12,10 @@ export const routers = [
     element: <LoginPage />,
   },
   {
+    path: "/register",
+    element: <></>,
+  },
+  {
     path: "/share",
     element: <SharePage />,
   },
