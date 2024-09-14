@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
-import { SocketProvider } from "./SocketContext";
+
+import { ActionCableProvider } from "./ActionCableContext";
 import { UserProvider } from "./UserContext";
 
 const AppContextProvider: React.FC<{ children: ReactNode }> = ({
@@ -7,9 +8,9 @@ const AppContextProvider: React.FC<{ children: ReactNode }> = ({
 }) => {
   return (
     <UserProvider>
-      <SocketProvider url={import.meta.env.VITE_SOCKET_URL || ""}>
+      <ActionCableProvider url={import.meta.env.VITE_SOCKET_URL || ""}>
         {children}
-      </SocketProvider>
+      </ActionCableProvider>
     </UserProvider>
   );
 };
