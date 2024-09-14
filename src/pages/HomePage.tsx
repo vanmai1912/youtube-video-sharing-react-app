@@ -5,7 +5,7 @@ import { useYoutubeSharing } from "@/hooks/useYoutubeSharing";
 import { YoutubeSharingItem } from "@/utils/types";
 
 const HomePage: React.FC = () => {
-  const [page] = useState<number>(3);
+  const [page] = useState<number>(1);
   const [videos, setVideos] = useState<YoutubeSharingItem[]>([]);
   const { isLoading, getVideos } = useYoutubeSharing();
 
@@ -13,7 +13,6 @@ const HomePage: React.FC = () => {
     const fetchingVideos = async () => {
       const response = await getVideos(page);
       if (response) {
-        console.log(response);
         setVideos(response?.data);
       }
     };

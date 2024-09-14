@@ -4,12 +4,12 @@ import { Link } from "react-router-dom";
 import { useUser } from "@/contexts/UserContext";
 
 const Header: React.FC = React.memo(() => {
-  console.log({
-    mode: import.meta.env.MODE,
-    baseUrl: import.meta.env.BASE_URL,
-    isProd: import.meta.env.PROD,
-    isDev: import.meta.env.DEV,
-  });
+  // console.log({
+  //   mode: import.meta.env.MODE,
+  //   baseUrl: import.meta.env.BASE_URL,
+  //   isProd: import.meta.env.PROD,
+  //   isDev: import.meta.env.DEV,
+  // });
 
   const { user, logout } = useUser();
 
