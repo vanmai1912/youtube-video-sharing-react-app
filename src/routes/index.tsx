@@ -1,8 +1,10 @@
+import { RouteObject } from "react-router-dom";
+
 import HomePage from "@/pages/HomePage";
 import LoginPage from "@/pages/LoginPage";
 import SharePage from "@/pages/SharePage";
 
-export const routers = [
+export const routers: RouteObject[] = [
   {
     path: "/",
     element: <HomePage />,
@@ -21,7 +23,6 @@ export const routers = [
   },
   {
     path: "*",
-    exact: false,
     element: <></>,
   },
 ];

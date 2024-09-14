@@ -6,16 +6,12 @@ import React, {
   useState,
 } from "react";
 
-// Define the shape of the user object
-interface User {
-  id: string;
-  name: string;
-  email: string;
-}
+import { LoginResponse, User } from "@/utils/types";
 
 interface UserContextType {
-  user: User | null;
-  setUser: (user: User | null) => void;
+  token?: string | null;
+  user?: User | null;
+  login: (data: LoginResponse) => void;
   logout: () => void;
 }
 
@@ -47,12 +43,20 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     }
   }, [user]);
 
+  const login = (data: LoginResponse) => {
+    localStorage.setItem("token", data.token);
+    localStorage.setItem("user", JSON.stringify(data.user));
+    setUser(data.user);
+  };
+
   const logout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
     setUser(null);
   };
 
   return (
-    <UserContext.Provider value={{ user, setUser, logout }}>
+    <UserContext.Provider value={{ user, login, logout }}>
       {children}
     </UserContext.Provider>
   );

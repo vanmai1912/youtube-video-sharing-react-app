@@ -1,9 +1,10 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-import { useAuth } from "@/hooks/useAuth";
+import { useUser } from "@/contexts/UserContext";
+import { useLogin } from "@/hooks/useLogin";
 import InputField from "./InputField";
 import { LoginFormData, loginSchema } from "./types";
 
@@ -16,12 +17,19 @@ const LoginForm: React.FC = () => {
     resolver: zodResolver(loginSchema),
   });
 
-  const { login, isLoading } = useAuth();
+  const { login, isLoading, error: apiError } = useLogin();
+  console.log(apiError);
+  const { login: loginAction } = useUser();
+  const navigate = useNavigate();
 
   const onSubmit = async (data: LoginFormData) => {
     // Handle form submission
     console.log("Form submitted:", data);
-    await login(data);
+    const loginData = await login(data);
+    if (loginData) {
+      loginAction(loginData);
+      navigate("/");
+    }
   };
 
   return (
@@ -47,6 +55,11 @@ const LoginForm: React.FC = () => {
         </div>
 
         <div className="text-right text-primary">
+          <div>
+            {apiError && (
+              <p className="flex text-error text-bold mt-1">{apiError}</p>
+            )}
+          </div>
           <Link to="/forgot-password">
             <span className="text-sm inline-block hover:text-primary hover:underline hover:cursor-pointer transition duration-200">
               Forgot Password?
