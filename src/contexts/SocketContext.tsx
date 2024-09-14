@@ -26,9 +26,13 @@ export const SocketProvider: React.FC<SocketProviderProps> = ({
   const [isConnected, setIsConnected] = useState(false);
 
   useEffect(() => {
-    const newSocket = io(url);
+    console.log(url);
+    const newSocket = io(url, {
+      transports: ["websocket"],
+    });
 
     newSocket.on("connect", () => {
+      console.log("Connected to socket server");
       setIsConnected(true);
     });
 

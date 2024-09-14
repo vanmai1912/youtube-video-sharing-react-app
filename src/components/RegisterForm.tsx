@@ -3,32 +3,27 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 
-import { useUser } from "@/contexts/UserContext";
-import { useLogin } from "@/hooks/useLogin";
+import { useRegister } from "@/hooks/useRegister";
 import InputField from "./InputField";
-import { LoginFormData, loginSchema } from "./types";
+import { RegisterFormData, registerSchema } from "./types";
 
 const RegisterForm: React.FC = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginFormData>({
-    resolver: zodResolver(loginSchema),
+  } = useForm<RegisterFormData>({
+    resolver: zodResolver(registerSchema),
   });
 
-  const { login, isLoading, error: apiError } = useLogin();
-  console.log(apiError);
-  const { login: loginAction } = useUser();
+  const { register: registerApi, isLoading, error: apiError } = useRegister();
   const navigate = useNavigate();
 
-  const onSubmit = async (data: LoginFormData) => {
+  const onSubmit = async (data: RegisterFormData) => {
     // Handle form submission
-    console.log("Form submitted:", data);
-    const loginData = await login(data);
-    if (loginData) {
-      loginAction(loginData);
-      navigate("/");
+    const registerResponse = await registerApi(data);
+    if (registerResponse) {
+      navigate("/login");
     }
   };
 
@@ -43,6 +38,22 @@ const RegisterForm: React.FC = () => {
             placeholder="Enter your email"
             register={register("email")}
             error={errors.email?.message}
+          />
+
+          <InputField
+            label="First name"
+            type="text"
+            placeholder="Enter your first name"
+            register={register("first_name")}
+            error={errors.first_name?.message}
+          />
+
+          <InputField
+            label="Last name"
+            type="text"
+            placeholder="Enter your last name"
+            register={register("last_name")}
+            error={errors.last_name?.message}
           />
 
           <InputField
@@ -75,15 +86,15 @@ const RegisterForm: React.FC = () => {
           {isLoading ? (
             <span className="loading loading-spinner loading-md"></span>
           ) : (
-            <span>Login</span>
+            <span>Register</span>
           )}
         </button>
 
         <div className="text-center mt-4">
-          Don't have an account yet?
-          <Link to="/register">
+          <span>You already have an account?</span>
+          <Link to="/login">
             <span className="inline-block hover:text-primary hover:underline hover:cursor-pointer transition duration-200">
-              Register
+              Login
             </span>
           </Link>
         </div>

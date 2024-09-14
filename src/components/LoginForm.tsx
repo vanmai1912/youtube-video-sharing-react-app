@@ -18,13 +18,11 @@ const LoginForm: React.FC = () => {
   });
 
   const { login, isLoading, error: apiError } = useLogin();
-  console.log(apiError);
   const { login: loginAction } = useUser();
   const navigate = useNavigate();
 
   const onSubmit = async (data: LoginFormData) => {
     // Handle form submission
-    console.log("Form submitted:", data);
     const loginData = await login(data);
     if (loginData) {
       loginAction(loginData);
