@@ -17,31 +17,40 @@ const Header: React.FC = React.memo(() => {
     e.preventDefault();
     logout();
   };
+  console.log('user: ', user)
 
   return (
-    <header className="flex flex-row justify-between items-center">
-      <div>
+    <header className="flex flex-col md:flex-row justify-between items-center p-4 bg-gray-100 shadow-md">
+      <div className="flex items-center mb-4 md:mb-0">
         <Link to="/">
-          <img className="w-24 h-24" src="logo.svg" />
+          <img className="w-24 h-24" src="logo.svg" alt="Logo" />
         </Link>
       </div>
-      <div className="gap-4 flex p-2">
+      <nav className="flex items-center flex-col md:flex-row gap-4">
         {user ? (
           <>
-            <span>Hello {user.email}</span>
-            <Link to="/">Home</Link>
-            <Link to="/share">Share</Link>
-            <Link to="/logout" onClick={handleLogout}>
+            <span className="text-lg font-semibold">Hello {user.first_name}</span>
+            <Link to="/" className="px-4 py-2 rounded bg-blue-500 text-white hover:bg-blue-600 transition-colors duration-300">
+              Home
+            </Link>
+            <Link to="/share" className="px-4 py-2 rounded bg-green-500 text-white hover:bg-green-600 transition-colors duration-300">
+              Share
+            </Link>
+            <Link to="/logout" onClick={handleLogout} className="px-4 py-2 rounded bg-red-500 text-white hover:bg-red-600 transition-colors duration-300">
               Logout
             </Link>
           </>
         ) : (
           <>
-          <Link to="/login">Login</Link>
-          <Link to="/register">Register</Link>
+            <Link to="/login" className="px-4 py-2 rounded bg-blue-500 text-white hover:bg-blue-600 transition-colors duration-300">
+              Login
+            </Link>
+            <Link to="/register" className="px-4 py-2 rounded bg-green-500 text-white hover:bg-green-600 transition-colors duration-300">
+              Register
+            </Link>
           </>
         )}
-      </div>
+      </nav>
     </header>
   );
 });
