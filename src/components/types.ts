@@ -16,3 +16,9 @@ export const registerSchema = z.object({
 });
 
 export type RegisterFormData = z.infer<typeof registerSchema>;
+
+export const shareSchema = z.object({
+  video_url: z.string().min(1, "Video url not blank").url("Invalid URL"),
+});
+
+export type ShareFormData = z.infer<typeof shareSchema>;

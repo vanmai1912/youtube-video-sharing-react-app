@@ -29,6 +29,7 @@ const Header: React.FC = React.memo(() => {
         {user ? (
           <>
             <span>Hello {user.email}</span>
+            <Link to="/">Home</Link>
             <Link to="/share">Share</Link>
             <Link to="/logout" onClick={handleLogout}>
               Logout

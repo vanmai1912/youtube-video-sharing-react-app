@@ -4,11 +4,16 @@ import HomePage from "@/pages/HomePage";
 import LoginPage from "@/pages/LoginPage";
 import SharePage from "@/pages/SharePage";
 import RegisterPage from "@/pages/RegisterPage";
+import PrivateRoute from "@/components/PrivateRoute";
 
 export const routers: RouteObject[] = [
   {
     path: "/",
-    element: <HomePage />,
+    element: (
+      <PrivateRoute>
+        <HomePage />
+      </PrivateRoute>
+    ), 
   },
   {
     path: "/login",
@@ -20,7 +25,11 @@ export const routers: RouteObject[] = [
   },
   {
     path: "/share",
-    element: <SharePage />,
+    element: (
+      <PrivateRoute>
+        <SharePage />
+      </PrivateRoute>
+    ),  
   },
   {
     path: "*",

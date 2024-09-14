@@ -6,6 +6,7 @@ import { useState } from "react";
 interface YoutubeSharingReturn {
   isLoading: boolean;
   error: string | null;
+  success: string | null;
   getVideos: (page: number) => Promise<null | YoutubeSharingResponse>;
   shareVideo: (videoUrl: string) => Promise<null | YoutubeSharingResponse>;
 }
@@ -13,6 +14,7 @@ interface YoutubeSharingReturn {
 export const useYoutubeSharing = (): YoutubeSharingReturn => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
 
   const getVideos = async (page: number = 0) => {
     const url = `${BASE_URL}/api/youtubes`;
@@ -52,7 +54,12 @@ export const useYoutubeSharing = (): YoutubeSharingReturn => {
     try {
       const response = await axios.post(url, {
         video_url: videoUrl,
+      }, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`
+        },
       });
+      setSuccess('Bạn đã chia sẽ video thành công')
       return response.data;
     } catch (err) {
       console.log(err);
@@ -69,5 +76,5 @@ export const useYoutubeSharing = (): YoutubeSharingReturn => {
     }
   };
 
-  return { getVideos, shareVideo, isLoading, error };
+  return { getVideos, shareVideo, isLoading, error, success };
 };
