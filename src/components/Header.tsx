@@ -30,15 +30,17 @@ const Header: React.FC = React.memo(() => {
         {user ? (
           <>
             <span className="text-lg font-semibold">Hello {user.first_name}</span>
-            <Link to="/" className="px-4 py-2 rounded bg-blue-500 text-white hover:bg-blue-600 transition-colors duration-300">
-              Home
-            </Link>
-            <Link to="/share" className="px-4 py-2 rounded bg-green-500 text-white hover:bg-green-600 transition-colors duration-300">
-              Share
-            </Link>
-            <Link to="/logout" onClick={handleLogout} className="px-4 py-2 rounded bg-red-500 text-white hover:bg-red-600 transition-colors duration-300">
-              Logout
-            </Link>
+            <div className="flex gap-2">
+              <Link to="/" className="px-4 py-2 rounded bg-blue-500 text-white hover:bg-blue-600 transition-colors duration-300">
+                Home
+              </Link>
+              <Link to="/share" className="px-4 py-2 rounded bg-green-500 text-white hover:bg-green-600 transition-colors duration-300">
+                Share
+              </Link>
+              <Link to="/logout" onClick={handleLogout} className="px-4 py-2 rounded bg-red-500 text-white hover:bg-red-600 transition-colors duration-300">
+                Logout
+              </Link>
+            </div>
           </>
         ) : (
           <>
