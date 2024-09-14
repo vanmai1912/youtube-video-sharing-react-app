@@ -3,6 +3,7 @@ import { RouteObject } from "react-router-dom";
 import HomePage from "@/pages/HomePage";
 import LoginPage from "@/pages/LoginPage";
 import SharePage from "@/pages/SharePage";
+import RegisterPage from "@/pages/RegisterPage";
 
 export const routers: RouteObject[] = [
   {
@@ -15,7 +16,7 @@ export const routers: RouteObject[] = [
   },
   {
     path: "/register",
-    element: <></>,
+    element: <RegisterPage />,
   },
   {
     path: "/share",

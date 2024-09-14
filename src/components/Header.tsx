@@ -35,7 +35,10 @@ const Header: React.FC = React.memo(() => {
             </Link>
           </>
         ) : (
+          <>
           <Link to="/login">Login</Link>
+          <Link to="/register">Register</Link>
+          </>
         )}
       </div>
     </header>
