@@ -7,7 +7,7 @@ const AppContextProvider: React.FC<{ children: ReactNode }> = ({
 }) => {
   return (
     <UserProvider>
-      <SocketProvider url={import.meta.env.REACT_APP_SOCKET_URL || ""}>
+      <SocketProvider url={import.meta.env.VITE_SOCKET_URL || ""}>
         {children}
       </SocketProvider>
     </UserProvider>

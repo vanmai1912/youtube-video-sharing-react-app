@@ -8,3 +8,9 @@ export interface LoginResponse {
   user: User;
   token: string;
 }
+
+export interface RegisterResponse {
+  status: string;
+  message?: string;
+  error?: string;
+}
