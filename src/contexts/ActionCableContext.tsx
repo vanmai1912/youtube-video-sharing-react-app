@@ -1,5 +1,7 @@
 import { Consumer, createConsumer } from "@rails/actioncable";
 import React, { createContext, useContext, useEffect, useState } from "react";
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 interface ActionCableContextType {
   cable: Consumer | null;
@@ -36,6 +38,9 @@ export const ActionCableProvider: React.FC<ActionCableProviderProps> = ({
       disconnected: () => {
         setIsConnected(false);
       },
+      received: (data: { message: string }) => {
+        toast.success(data.message)
+      },
     });
 
     setCable(newCable);
@@ -45,7 +50,7 @@ export const ActionCableProvider: React.FC<ActionCableProviderProps> = ({
         cable.disconnect();
       }
     };
-  }, [url]);
+  }, []);
 
   return (
     <ActionCableContext.Provider value={{ cable, isConnected }}>
